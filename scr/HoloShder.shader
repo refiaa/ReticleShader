@@ -3,7 +3,7 @@ Shader "custom/HolosightReflectiveTesting"
     Properties{
 
         _reticleTex("Reticle Texture", 2D) = "white" {}
-        _reticleColor("Reticle Color", Color) = (1, 0, 0, 1)
+        _reticleColor("Reticle Color", Color) = (1, 1, 1, 1)
         _reticleBrightness("Reticle Brightness", Range(0, 1)) = 1
         _glassColor("Glass Color", Color) = (1, 1, 1, 1)
         _glassTransparency("Glass Transparency", Range(0, 1)) = 0.1
@@ -32,6 +32,7 @@ SubShader{
     {
         float3 worldPos;
         float3 worldNormal;
+        float2 uv_Normal; 
     };
 
     void surf_reflective_glass_fresnel(Input IN, inout SurfaceOutput o) {
