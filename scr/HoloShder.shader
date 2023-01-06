@@ -3,9 +3,9 @@ Shader "custom/HolosightReflectiveTesting"
     Properties{
 
         _reticleTex("Reticle Texture", 2D) = "white" {}
-        _reticleColour("Reticle Color", Color) = (1, 0, 0, 1)
+        _reticleColor("Reticle Color", Color) = (1, 0, 0, 1)
         _reticleBrightness("Reticle Brightness", Range(0, 1)) = 1
-        _glassColour("Glass Color", Color) = (1, 1, 1, 1)
+        _glassColor("Glass Color", Color) = (1, 1, 1, 1)
         _glassTransparency("Glass Transparency", Range(0, 1)) = 0.1
         _uvScale("Reticle Scale", float) = 1
         _Metallic("Metallic", Range(0, 1)) = 0.5 
