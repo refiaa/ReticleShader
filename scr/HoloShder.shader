@@ -1,4 +1,4 @@
-Shader "custom/HolosightReflectiveTesting"
+Shader "custom/HolosightReflective"
 {
     Properties{
 
@@ -32,7 +32,9 @@ SubShader{
     {
         float3 worldPos;
         float3 worldNormal;
+        float3 viewDir;
         float2 uv_Normal; 
+        
     };
 
     void surf_reflective_glass_fresnel(Input IN, inout SurfaceOutput o) {
@@ -44,7 +46,7 @@ SubShader{
         half4 col = tex2D(_reticleTex, (0.5, 0.5) + uvDelta);
 
         
-        fixed3 refl = surf_reflective_glass_fresnel(IN.worldNormal, IN.viewDir, _Metallic, _Smoothness, _Normal);
+        //fixed3 refl = surf_reflective_glass_fresnel(IN.worldNormal, IN.viewDir, _Metallic, _Smoothness, _Normal);
         o.Albedo = max(col.a * _reticleColor.rgb, _glassTransparency * _glassColor.rgb);
         o.Alpha = max(col.a, _glassTransparency);
 
@@ -52,8 +54,13 @@ SubShader{
         o.Metallic = _Metallic;
         o.Smoothness = _Smoothness;
         o.Normal = UnpackNormal(tex2D(_Normal, IN.uv_Normal)); 
-        o.Specular = refl; 
+        //o.Specular = refl; 
 
+        fixed fresnel = F_Schlick(max(dot(IN.viewDir, IN.worldNormal), 0), _Metallic);
+        o.Specular = fresnel;
+
+        o.Specular *= _Smoothness;
+        
     }
 
     ENDCG
