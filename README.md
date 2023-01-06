@@ -1,4 +1,8 @@
 # ReticleShader
-Doesnt work
+
+
+use Quad in Unity Scene and using this shader in material
+
+
 
 
